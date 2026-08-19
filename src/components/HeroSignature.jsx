@@ -77,9 +77,9 @@ export default function HeroSignature() {
   const resetTilt = () => { if (tiltRef.current) tiltRef.current.style.transform = '' }
 
   return (
-    <section className="pt-[18px]">
-      <div className="w-[min(1280px,calc(100%-48px))] mx-auto">
-        <div className="min-h-[650px] rounded-[22px] overflow-hidden relative bg-[radial-gradient(circle_at_72%_30%,rgba(255,255,255,0.72),transparent_20%),radial-gradient(circle_at_86%_82%,rgba(184,107,79,0.16),transparent_28%),linear-gradient(135deg,#f2ecdf_0%,#e7dfcf_52%,#cfd8c5_100%)]">
+    <section>
+      <div className="w-full">
+        <div className="min-h-[650px] overflow-hidden relative bg-[radial-gradient(circle_at_72%_30%,rgba(255,255,255,0.72),transparent_20%),radial-gradient(circle_at_86%_82%,rgba(184,107,79,0.16),transparent_28%),linear-gradient(135deg,#f2ecdf_0%,#e7dfcf_52%,#cfd8c5_100%)]">
           <div className="absolute inset-0 opacity-[0.22] pointer-events-none bg-[radial-gradient(rgba(35,71,53,0.08)_0.7px,transparent_0.7px)] bg-[size:8px_8px] mix-blend-multiply" />
 
           {/* ── Left copy ── */}
@@ -131,7 +131,7 @@ export default function HeroSignature() {
                       className={`
                         absolute inset-0 transition-[background] duration-400
                         ${isWide
-                          ? 'bg-gradient-to-br from-[rgba(10,16,12,0.6)] via-[rgba(10,16,12,0.25)] to-[rgba(10,16,12,0.78)]'
+                          ? 'bg-gradient-to-br from-[rgba(10,16,12,0.18)] via-[rgba(10,16,12,0.05)] to-[rgba(10,16,12,0.45)]'
                           : 'bg-gradient-to-t from-[rgba(10,16,12,0.85)] via-[rgba(10,16,12,0.45)] to-[rgba(10,16,12,0.1)]'
                         }
                       `}

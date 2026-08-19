@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CartProvider } from './context/CartContext'
 
-import Announcement      from './components/Announcement'
+
 import Navbar            from './components/Navbar'
 import SearchBar         from './components/SearchBar'
 import HeroSignature     from './components/HeroSignature'
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <CartProvider>
-      <Announcement />
+
 
       <Navbar
         onCartOpen={() => { setCartOpen(true); document.body.style.overflow = 'hidden' }}

@@ -52,6 +52,11 @@
     to   { transform: translateX(-33.333%); }
   }
 
+  @keyframes navTicker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
   @keyframes dotPulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(181, 139, 81, .7); opacity: 1; }
     60%       { box-shadow: 0 0 0 7px rgba(181, 139, 81, 0); opacity: .8; }

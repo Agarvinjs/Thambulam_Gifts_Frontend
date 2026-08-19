@@ -70,10 +70,10 @@ export default function BulkQuoteSection() {
         </div>
 
         {/* Main 2-Column Interactive Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[32px] items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[32px] items-stretch">
 
           {/* Left Column: Interactive Planner Controls (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-[28px] bg-white rounded-[22px] p-[28px] md:p-[36px] border border-line shadow-sm">
+          <div className="lg:col-span-7 flex flex-col justify-between gap-[28px] bg-white rounded-[22px] p-[28px] md:p-[36px] border border-line shadow-sm h-full">
 
             {/* Step 1: Select Occasion Cards */}
             <div className="flex flex-col gap-[12px]">
@@ -185,7 +185,7 @@ export default function BulkQuoteSection() {
           </div>
 
           {/* Right Column: Live Event Pass / Summary Ticket (5 cols) */}
-          <div className="lg:col-span-5 bg-gradient-to-b from-[#234735] to-[#172e23] text-paper rounded-[22px] p-[28px] md:p-[32px] shadow-custom flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-5 bg-gradient-to-b from-[#234735] to-[#172e23] text-paper rounded-[22px] p-[28px] md:p-[32px] shadow-custom flex flex-col justify-between relative overflow-hidden h-full">
             <div className="absolute top-0 right-0 w-[240px] h-[240px] bg-gold/15 rounded-full blur-[70px] pointer-events-none" />
 
             <div>
