@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 /* ─── Data ──────────────────────────────────────── */
 const THEMES = {
@@ -46,17 +46,32 @@ const PANELS = [
   { key: 'utility', tag: 'LOVED', name: 'Keepsakes', emoji: '♡', img: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=85' },
 ]
 
-const TICKER_WORDS = ['THOUGHTFULLY CRAFTED · ', 'BEAUTIFULLY MADE · ', 'JOYFULLY GIVEN · ', 'LOVINGLY KEPT · ']
-
 export default function HeroSignature() {
   const [theme, setTheme] = useState('wedding')
   const [pick, setPick] = useState(null)
   const [active, setActive] = useState(0)   // which panel is "wide"
   const [tick, setTick] = useState(0)   // invite text version (triggers re-render key)
+  const [isPaused, setIsPaused] = useState(false)
   const tiltRef = useRef(null)
 
   const t = THEMES[theme]
   const invite = pick ? PICKS[pick] : { mini: t.mini, title: t.title, copy: t.copy }
+
+  /* Auto-move the four image panels every 3.5s */
+  useEffect(() => {
+    if (isPaused) return
+
+    const timer = setInterval(() => {
+      setActive(prev => {
+        const next = (prev + 1) % PANELS.length
+        setPick(PANELS[next].key)
+        setTick(n => n + 1)
+        return next
+      })
+    }, 3500)
+
+    return () => clearInterval(timer)
+  }, [isPaused])
 
   const handlePick = (key, idx) => {
     setPick(key)
@@ -79,27 +94,47 @@ export default function HeroSignature() {
   return (
     <section>
       <div className="w-full">
-        <div className="min-h-[650px] overflow-hidden relative bg-[radial-gradient(circle_at_72%_30%,rgba(255,255,255,0.72),transparent_20%),radial-gradient(circle_at_86%_82%,rgba(184,107,79,0.16),transparent_28%),linear-gradient(135deg,#f2ecdf_0%,#e7dfcf_52%,#cfd8c5_100%)]">
+        <div className="min-h-none md:min-h-[650px] py-8 md:py-0 overflow-hidden relative bg-[radial-gradient(circle_at_72%_30%,rgba(255,255,255,0.72),transparent_20%),radial-gradient(circle_at_86%_82%,rgba(184,107,79,0.16),transparent_28%),linear-gradient(135deg,#f2ecdf_0%,#e7dfcf_52%,#cfd8c5_100%)]">
           <div className="absolute inset-0 opacity-[0.22] pointer-events-none bg-[radial-gradient(rgba(35,71,53,0.08)_0.7px,transparent_0.7px)] bg-[size:8px_8px] mix-blend-multiply" />
 
           {/* ── Left copy ── */}
           <div className="relative md:absolute z-10 md:left-[6%] top-auto md:top-1/2 md:-translate-y-1/2 w-full md:w-[43%] max-w-[540px] flex flex-col justify-center p-6 md:p-0">
             <span className="uppercase tracking-[0.13em] text-[10px] font-bold text-terracotta mb-[13px]">{t.eyebrow}</span>
-            <h1 className="font-serif text-green text-[clamp(49px,5.4vw,77px)] leading-[0.94] tracking-[-0.025em] [&_.accent]:text-terracotta [&_.accent]:not-italic" dangerouslySetInnerHTML={{ __html: t.headline }} />
+            <h1 className="font-serif text-green text-[clamp(42px,5.4vw,77px)] leading-[0.94] tracking-[-0.025em] [&_.accent]:text-terracotta [&_.accent]:not-italic" dangerouslySetInnerHTML={{ __html: t.headline }} />
             <p className="max-w-[470px] text-[#707269] text-[14px] my-[20px]">{t.sub}</p>
             <div className="flex gap-[10px] flex-wrap">
               <a className="rounded-[7px] px-[19px] py-[13px] text-[12px] font-bold border border-transparent inline-flex items-center gap-[8px] bg-green text-white" href="#products">{pick ? PICKS[pick].cta : t.cta}</a>
               <a className="rounded-[7px] px-[19px] py-[13px] text-[12px] font-bold border border-green inline-flex items-center gap-[8px] bg-transparent text-green" href="#bulk">Need 50+ gifts?</a>
             </div>
-            <div className="flex gap-[24px] mt-[24px]">
+            <div className="flex gap-[20px] sm:gap-[24px] mt-[24px]">
               <div><strong className="block text-green text-[17px]">1,200+</strong><span className="text-[9px] text-muted">gift designs</span></div>
               <div><strong className="block text-green text-[17px]">₹49+</strong><span className="text-[9px] text-muted">starting price</span></div>
               <div><strong className="block text-green text-[17px]">50+</strong><span className="text-[9px] text-muted">bulk support</span></div>
             </div>
+
+            {/* Theme switcher pill buttons below stats */}
+            <div className="flex items-center gap-[4px] sm:gap-[5px] mt-[24px] bg-white/80 p-[4px] border border-[rgba(35,71,53,0.12)] rounded-[18px] sm:rounded-full backdrop-blur-[8px] shadow-xs w-fit max-w-full flex-wrap sm:flex-nowrap">
+              {Object.keys(THEMES).map(key => (
+                <button
+                  key={key}
+                  className={`
+                    border-0 rounded-full px-[12px] sm:px-[14px] py-[5px] sm:py-[6px] text-[10.5px] sm:text-[11px] font-bold cursor-pointer transition-colors
+                    ${theme === key ? 'bg-green text-white shadow-xs' : 'bg-transparent text-[#60635c] hover:text-green'}
+                  `}
+                  onClick={() => handleTheme(key)}
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* ── Split-Frame Lookbook ── */}
-          <div className="relative md:absolute z-10 md:right-[2%] top-auto md:top-[5%] w-full md:w-[55%] h-[480px] md:h-[90%] flex flex-col p-4 md:p-0">
+          <div
+            className="relative md:absolute z-10 md:right-[2%] top-auto md:top-[5%] w-full md:w-[55%] h-[480px] md:h-[90%] flex flex-col p-4 md:p-0"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
 
             {/* Split panels */}
             <div className="flex-1 flex flex-row gap-[6px] rounded-[18px] overflow-hidden shadow-[0_30px_65px_rgba(35,71,53,0.2),0_6px_20px_rgba(35,71,53,0.1)]">
@@ -166,35 +201,6 @@ export default function HeroSignature() {
                 )
               })}
             </div>
-
-            {/* Bottom scroll-tape ticker */}
-            <div className="h-[34px] bg-green rounded-b-[10px] overflow-hidden flex items-center shrink-0" aria-hidden="true">
-              <div className="flex whitespace-nowrap animate-[tickerScroll_18s_linear_infinite] gap-0">
-                {[...TICKER_WORDS, ...TICKER_WORDS, ...TICKER_WORDS].map((w, i) => (
-                  <span key={i} className="text-[9px] font-extrabold tracking-[0.22em] uppercase text-white/60 shrink-0">{w}</span>
-                ))}
-              </div>
-            </div>
-
-            {/* Theme switcher */}
-            <div className="absolute z-30 right-[5%] bottom-[6%] flex gap-[6px] bg-white/78 p-[6px] border border-[rgba(35,71,53,0.08)] rounded-full backdrop-blur-[8px]">
-              {Object.keys(THEMES).map(key => (
-                <button
-                  key={key}
-                  className={`
-                    border-0 rounded-full px-[10px] py-[7px] text-[8.5px] font-bold cursor-pointer
-                    ${theme === key ? 'bg-green text-white' : 'bg-transparent text-[#74776f]'}
-                  `}
-                  onClick={() => handleTheme(key)}
-                >
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="hidden md:block absolute left-[6%] bottom-[3.5%] z-10 text-green text-[11.5px] font-semibold">
-            A different kind of return gift <span className="text-muted font-normal">— personal, useful, beautifully made.</span>
           </div>
         </div>
       </div>

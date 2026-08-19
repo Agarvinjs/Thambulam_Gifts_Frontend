@@ -51,16 +51,6 @@ const NAV_ITEMS = [
   { label: 'By Budget', href: '#budget', simple: true },
   { label: 'Bulk Orders', href: '#bulk', simple: true },
 ]
-const TICKER_ITEMS = [
-  'THOUGHTFULLY CRAFTED',
-  'BEAUTIFULLY MADE',
-  'JOYFULLY GIVEN',
-  'LOVINGLY KEPT',
-  'WEDDING SEASON IS HERE',
-  'PAN-INDIA DELIVERY',
-  'BULK ORDERS WELCOME',
-  'CUSTOM TAGS AVAILABLE',
-]
 
 export default function Navbar({ onCartOpen, onSearchToggle }) {
   const { cartCount } = useCart()
@@ -71,7 +61,7 @@ export default function Navbar({ onCartOpen, onSearchToggle }) {
 
       {/* ── Layer 1: Brand bar ── */}
       <div className="bg-paper/96 backdrop-blur-[14px] border-b border-line">
-        <div className="w-[min(1440px,calc(100%-48px))] mx-auto h-[56px] grid grid-cols-[auto_1fr_auto] md:grid-cols-[200px_1fr_200px] items-center gap-[16px]">
+        <div className="w-[min(1440px,calc(100%-48px))] mx-auto h-[56px] flex items-center justify-between gap-[16px]">
 
           {/* LEFT — Logo + mobile hamburger */}
           <div className="flex items-center gap-[10px]">
@@ -88,27 +78,6 @@ export default function Navbar({ onCartOpen, onSearchToggle }) {
               <BrandMark />
               <span className="font-serif text-[29px] leading-none">Ilai</span>
             </a>
-          </div>
-
-          {/* CENTER — Animated ticker */}
-          <div className="hidden md:flex items-center justify-center overflow-hidden">
-            <div className="relative w-full overflow-hidden">
-              {/* Fade edges */}
-              <div className="absolute left-0 top-0 bottom-0 w-[48px] bg-gradient-to-r from-paper/96 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-[48px] bg-gradient-to-l from-paper/96 to-transparent z-10 pointer-events-none" />
-              {/* Scrolling track */}
-              <div
-                className="flex whitespace-nowrap"
-                style={{ animation: 'navTicker 22s linear infinite' }}
-              >
-                {[...TICKER_ITEMS, ...TICKER_ITEMS].map((w, i) => (
-                  <span key={i} className="inline-flex items-center gap-[10px] shrink-0">
-                    <span className="text-[9.5px] font-bold tracking-[0.18em] uppercase text-muted/60">{w}</span>
-                    <span className="text-terracotta text-[8px] mx-[6px]">✦</span>
-                  </span>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* RIGHT — Action icons */}
