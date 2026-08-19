@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #20251f;
+  --color-green: #234735;
+  --color-green2: #3f654f;
+  --color-cream: #f7f3eb;
+  --color-paper: #fffdf9;
+  --color-terracotta: #b86b4f;
+  --color-gold: #b58b51;
+  --color-sage: #dce6d7;
+  --color-line: #e8e1d6;
+  --color-muted: #76776f;
+
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "DM Serif Display", serif;
+
+  --shadow-custom: 0 18px 45px rgba(35, 71, 53, 0.10);
+  --radius-custom: 16px;
+
+  --animate-ribbon: ribbonMove 28s linear infinite;
+  --animate-kenburns: kenBurns 18s ease-in-out infinite;
+  --animate-dotpulse: dotPulse 1.6s ease infinite;
+  --animate-[#sfGrain]: sfGrain 8s steps(1) infinite;
+  --animate-[#sfTagSlide]: sfTagSlide 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+  --animate-[#sfFadeUp]: sfFadeUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  --animate-[#sfTitleReveal]: sfTitleReveal 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+
+  @keyframes ribbonMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes sfFadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes sfTitleReveal {
+    from { opacity: 0; transform: translateY(22px) skewY(2deg); }
+    to   { opacity: 1; transform: translateY(0)   skewY(0deg); }
+  }
+
+  @keyframes sfTagSlide {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-33.333%); }
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(181, 139, 81, .7); opacity: 1; }
+    60%       { box-shadow: 0 0 0 7px rgba(181, 139, 81, 0); opacity: .8; }
+  }
+
+  @keyframes sfGrain {
+    0%, 100% { background-position: 0 0; }
+    10%      { background-position: -5% -10%; }
+    30%      { background-position: 10% -5%; }
+    50%      { background-position: -10% 10%; }
+    70%      { background-position: 5% 15%; }
+    90%      { background-position: -8% 2%; }
+  }
+
+  @keyframes kenBurns {
+    0%   { transform: scale(1)    translate(0,0); }
+    50%  { transform: scale(1.07) translate(-1.5%, .8%); }
+    100% { transform: scale(1)    translate(0,0); }
+  }
+}
+
+:root {
+  --ink: #20251f;
+  --green: #234735;
+  --green2: #3f654f;
+  --cream: #f7f3eb;
+  --paper: #fffdf9;
+  --terracotta: #b86b4f;
+  --gold: #b58b51;
+  --sage: #dce6d7;
+  --line: #e8e1d6;
+  --muted: #76776f;
+  --shadow: 0 18px 45px rgba(35, 71, 53, .10);
+  --radius: 16px;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+}
