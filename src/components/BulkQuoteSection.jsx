@@ -1,84 +1,309 @@
 import { useState } from 'react'
 
+const OCCASIONS = [
+  { id: 'wedding', label: 'Wedding', icon: '💍', sub: 'Traditional & Modern Sets' },
+  { id: 'return-gifts', label: 'Return Gifts', icon: '🎁', sub: 'Compact & Elegant Favors' },
+  { id: 'housewarming', label: 'Housewarming', icon: '🏡', sub: 'Brass & Eco-friendly Keepsakes' },
+  { id: 'pooja', label: 'Pooja / Festival', icon: '🪔', sub: 'Sacred & Artisanal Items' },
+  { id: 'corporate', label: 'Corporate Event', icon: '💼', sub: 'Premium Branded Hampers' },
+  { id: 'other', label: 'Other', icon: '✨', sub: 'Custom Celebration & Events' }
+]
+
+const BUDGET_OPTIONS = [
+  { label: 'Under ₹150 / piece', value: '₹150' },
+  { label: '₹150 – ₹300 / piece', value: '₹150-300' },
+  { label: '₹300 – ₹500 / piece', value: '₹300-500' },
+  { label: '₹500+ Luxury Sets', value: '₹500+' }
+]
+
 export default function BulkQuoteSection() {
+  const [selectedOccasion, setSelectedOccasion] = useState(OCCASIONS[0])
+  const [customOccasion, setCustomOccasion] = useState('')
+  const [guestCount, setGuestCount] = useState(150)
+  const [budget, setBudget] = useState(BUDGET_OPTIONS[1])
+  
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert("Thanks — your bulk enquiry is captured. Connect this form to your backend, WhatsApp or email endpoint.")
-    e.target.reset()
+    setSubmitted(true)
   }
 
-  return (
-    <section className="py-[78px] bg-paper" id="bulk">
-      <div className="w-[min(1280px,calc(100%-48px))] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[40px] items-center">
+  const effectiveOccasionLabel = selectedOccasion.id === 'other'
+    ? (customOccasion.trim() ? customOccasion.trim() : 'Custom Event')
+    : selectedOccasion.label
 
-        {/* Left: pitch copy */}
-        <div>
-          <span className="uppercase tracking-[0.13em] text-[10px] font-bold text-terracotta mb-[10px] block">For weddings, events &amp; large celebrations</span>
-          <h2 className="font-serif text-green text-[50px] leading-[1.05] mt-[10px] mb-[16px]">Got a guest list?<br />We'll help with the gifts.</h2>
-          <p className="text-[13px] text-muted max-w-[520px] mb-[24px] leading-[1.65]">Share your occasion, approximate quantity and budget. We'll help you narrow down products, combinations and personalisation — without the spreadsheet headache.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[11px_18px]">
-            <div className="flex items-center gap-[9px] text-[11px] text-[#4a5249] font-medium"><b className="w-[20px] h-[20px] rounded-full flex items-center justify-center bg-green text-white text-[10px] shrink-0 font-normal">✓</b>Quantity-based pricing</div>
-            <div className="flex items-center gap-[9px] text-[11px] text-[#4a5249] font-medium"><b className="w-[20px] h-[20px] rounded-full flex items-center justify-center bg-green text-white text-[10px] shrink-0 font-normal">✓</b>Custom tags &amp; monograms</div>
-            <div className="flex items-center gap-[9px] text-[11px] text-[#4a5249] font-medium"><b className="w-[20px] h-[20px] rounded-full flex items-center justify-center bg-green text-white text-[10px] shrink-0 font-normal">✓</b>Product shortlisting</div>
-            <div className="flex items-center gap-[9px] text-[11px] text-[#4a5249] font-medium"><b className="w-[20px] h-[20px] rounded-full flex items-center justify-center bg-green text-white text-[10px] shrink-0 font-normal">✓</b>Dedicated order support</div>
+  return (
+    <section className="py-[84px] bg-[#fbf9f4] border-y border-line/60 relative overflow-hidden" id="bulk">
+      <div className="w-[min(1280px,calc(100%-48px))] mx-auto flex flex-col gap-[44px]">
+
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-[20px]">
+          <div>
+            <div className="inline-flex items-center gap-[8px] bg-cream border border-gold/40 px-[14px] py-[4px] rounded-full mb-[12px]">
+              <span className="uppercase tracking-[0.14em] text-[10.5px] font-bold text-terracotta">
+                For Large Celebrations & Events
+              </span>
+            </div>
+            <h2 className="font-serif text-green text-[36px] md:text-[46px] leading-[1.1]">
+              Custom Bulk Gifting Planner
+            </h2>
+            <p className="text-[14px] text-muted leading-[1.6] max-w-[560px] mt-[6px]">
+              Configure your event requirements below to generate an instant estimate & custom shortlist.
+            </p>
+          </div>
+
+          {/* Guarantee Badges */}
+          <div className="flex items-center gap-[16px] text-[12px] text-green font-medium flex-wrap">
+            <span className="flex items-center gap-[6px] bg-white px-[12px] py-[6px] rounded-full border border-line">
+              <span className="text-gold">✓</span> Tiered Pricing
+            </span>
+            <span className="flex items-center gap-[6px] bg-white px-[12px] py-[6px] rounded-full border border-line">
+              <span className="text-gold">✓</span> Free Monograms
+            </span>
+            <span className="flex items-center gap-[6px] bg-white px-[12px] py-[6px] rounded-full border border-line">
+              <span className="text-gold">✓</span> Doorstep Samples
+            </span>
           </div>
         </div>
 
-        {/* Right: premium form card */}
-        <div className="bg-white rounded-[20px] p-[34px_30px] shadow-[0_20px_60px_rgba(35,71,53,0.10),0_2px_8px_rgba(35,71,53,0.05)] border border-[rgba(35,71,53,0.08)] relative overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[4px] before:bg-gradient-to-r before:from-green before:via-gold before:to-terracotta before:rounded-t-[20px]">
-          <div className="mb-[20px]">
-            <div className="inline-flex items-center gap-[6px] bg-[rgba(35,71,53,0.07)] text-green text-[9.5px] font-bold tracking-[0.08em] uppercase px-[10px] py-[4px] rounded-full mb-[10px]">✦ Quick Quote</div>
-            <h3 className="font-serif text-[28px] text-green leading-[1.1] mb-[4px]">Tell us about<br />your event</h3>
-            <p className="text-muted text-[11px]">We'll follow up within one business day with gifting options.</p>
+        {/* Main 2-Column Interactive Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[32px] items-start">
+
+          {/* Left Column: Interactive Planner Controls (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col gap-[28px] bg-white rounded-[22px] p-[28px] md:p-[36px] border border-line shadow-sm">
+
+            {/* Step 1: Select Occasion Cards */}
+            <div className="flex flex-col gap-[12px]">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-terracotta">
+                  Step 1 • Select Event Occasion
+                </span>
+                <span className="text-[12px] font-bold text-green font-serif">
+                  {effectiveOccasionLabel}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-[10px]">
+                {OCCASIONS.map(occ => (
+                  <button
+                    type="button"
+                    key={occ.id}
+                    onClick={() => setSelectedOccasion(occ)}
+                    className={`p-[14px_16px] rounded-[14px] border text-left transition-all flex items-start gap-[12px] ${
+                      selectedOccasion.id === occ.id
+                        ? 'border-green bg-cream/60 ring-2 ring-green/10 shadow-sm'
+                        : 'border-line hover:border-gold/60 bg-paper/50'
+                    }`}
+                  >
+                    <span className="text-[24px] shrink-0">{occ.icon}</span>
+                    <div>
+                      <h4 className="text-[13.5px] font-bold text-green">{occ.label}</h4>
+                      <p className="text-[11px] text-muted mt-[2px]">{occ.sub}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 2: Guest Count Slider & Range */}
+            <div className="flex flex-col gap-[14px] border-t border-line/60 pt-[24px]">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-terracotta">
+                  Step 2 • Estimated Guest Count
+                </span>
+                <span className="text-[16px] font-serif font-bold text-green bg-cream px-[12px] py-[3px] rounded-full">
+                  {guestCount} Guests
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-[12px]">
+                <input
+                  type="range"
+                  min="25"
+                  max="1000"
+                  step="25"
+                  value={guestCount}
+                  onChange={(e) => setGuestCount(Number(e.target.value))}
+                  className="w-full h-[6px] bg-line rounded-lg appearance-none cursor-pointer accent-green"
+                />
+
+                {/* Accurately Aligned Tick Mark Labels */}
+                <div className="relative w-full h-[20px] text-[11px] text-muted font-medium select-none">
+                  <span
+                    onClick={() => setGuestCount(25)}
+                    className="absolute left-0 cursor-pointer hover:text-green"
+                  >
+                    25
+                  </span>
+                  <span
+                    onClick={() => setGuestCount(250)}
+                    className="absolute left-[23%] -translate-x-1/2 cursor-pointer hover:text-green"
+                  >
+                    250
+                  </span>
+                  <span
+                    onClick={() => setGuestCount(500)}
+                    className="absolute left-[49%] -translate-x-1/2 cursor-pointer hover:text-green"
+                  >
+                    500 Guests
+                  </span>
+                  <span
+                    onClick={() => setGuestCount(1000)}
+                    className="absolute right-0 cursor-pointer hover:text-green"
+                  >
+                    1,000+
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: Budget Range Selector */}
+            <div className="flex flex-col gap-[12px] border-t border-line/60 pt-[24px]">
+              <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-terracotta">
+                Step 3 • Target Budget / Gift
+              </span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-[8px]">
+                {BUDGET_OPTIONS.map(b => (
+                  <button
+                    type="button"
+                    key={b.value}
+                    onClick={() => setBudget(b)}
+                    className={`py-[10px] px-[12px] rounded-[10px] text-[12px] font-bold border transition-all text-center ${
+                      budget.value === b.value
+                        ? 'bg-green text-white border-green shadow-sm'
+                        : 'bg-paper border-line text-ink hover:border-gold'
+                    }`}
+                  >
+                    {b.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
           </div>
-          <form className="grid gap-[10px]" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[10px]">
-              <div className="flex items-center border-[1.5px] border-line rounded-[9px] bg-[#fafaf8] transition-colors focus-within:border-green focus-within:bg-white focus-within:ring-3 focus-within:ring-[rgba(35,71,53,0.08)] overflow-hidden">
-                <span className="pl-[13px] pr-[6px] text-[14px] leading-none shrink-0 opacity-65 pointer-events-none flex items-center font-sans">👤</span>
-                <input required placeholder="Your name" className="flex-1 border-0 rounded-none py-[11px] pl-[4px] pr-[12px] text-[11.5px] outline-none bg-transparent text-ink min-w-0 placeholder:text-[#b0b8b4]" />
+
+          {/* Right Column: Live Event Pass / Summary Ticket (5 cols) */}
+          <div className="lg:col-span-5 bg-gradient-to-b from-[#234735] to-[#172e23] text-paper rounded-[22px] p-[28px] md:p-[32px] shadow-custom flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[240px] h-[240px] bg-gold/15 rounded-full blur-[70px] pointer-events-none" />
+
+            <div>
+              {/* Ticket Header */}
+              <div className="flex items-center justify-between border-b border-white/15 pb-[18px] mb-[20px]">
+                <div>
+                  <span className="text-[10px] uppercase font-bold tracking-[0.12em] text-gold block">
+                    Gifting Concierge Pass
+                  </span>
+                  <h3 className="font-serif text-[22px] text-white font-bold mt-[2px]">
+                    Event Quote Summary
+                  </h3>
+                </div>
+                <span className="w-[36px] h-[36px] rounded-full bg-white/10 grid place-items-center text-[18px]">
+                  {selectedOccasion.icon}
+                </span>
               </div>
-              <div className="flex items-center border-[1.5px] border-line rounded-[9px] bg-[#fafaf8] transition-colors focus-within:border-green focus-within:bg-white focus-within:ring-3 focus-within:ring-[rgba(35,71,53,0.08)] overflow-hidden">
-                <span className="pl-[13px] pr-[6px] text-[14px] leading-none shrink-0 opacity-65 pointer-events-none flex items-center font-sans">📱</span>
-                <input required type="tel" placeholder="WhatsApp number" className="flex-1 border-0 rounded-none py-[11px] pl-[4px] pr-[12px] text-[11.5px] outline-none bg-transparent text-ink min-w-0 placeholder:text-[#b0b8b4]" />
+
+              {/* Summary Items Table */}
+              <div className="flex flex-col gap-[14px] bg-white/5 border border-white/10 rounded-[16px] p-[18px] text-[13px]">
+                <div className="flex flex-col gap-[8px] border-b border-white/10 pb-[10px]">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/70">Selected Occasion:</span>
+                    <strong className="text-white font-bold">{selectedOccasion.label}</strong>
+                  </div>
+
+                  {/* Dynamic Custom Occasion Input if "Other" is selected */}
+                  {selectedOccasion.id === 'other' && (
+                    <div className="flex flex-col gap-[4px] mt-[4px]">
+                      <label className="text-[10.5px] text-gold font-bold uppercase tracking-[0.05em]">
+                        Specify Your Event Type:
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={customOccasion}
+                        onChange={(e) => setCustomOccasion(e.target.value)}
+                        placeholder="e.g. Birthday, Anniversary, Sangeet..."
+                        className="w-full bg-white/10 border border-gold/40 rounded-[8px] px-[12px] py-[7px] text-[12px] text-white placeholder:text-white/40 outline-none focus:border-gold transition-colors"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between border-b border-white/10 pb-[10px]">
+                  <span className="text-white/70">Total Guests / Pieces:</span>
+                  <strong className="text-gold font-bold">{guestCount} Units</strong>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/70">Budget Category:</span>
+                  <strong className="text-white font-bold">{budget.label}</strong>
+                </div>
               </div>
             </div>
-            <div className="flex items-center border-[1.5px] border-line rounded-[9px] bg-[#fafaf8] transition-colors focus-within:border-green focus-within:bg-white focus-within:ring-3 focus-within:ring-[rgba(35,71,53,0.08)] overflow-hidden">
-              <span className="pl-[13px] pr-[6px] text-[14px] leading-none shrink-0 opacity-65 pointer-events-none flex items-center font-sans">🎉</span>
-              <select required className="flex-1 border-0 rounded-none py-[11px] pl-[4px] pr-[32px] text-[11.5px] outline-none bg-transparent text-ink min-w-0 appearance-none bg-[url('data:image/svg+xml,%3Csvg_xmlns=%27http://www.w3.org/2000/svg%27_width=%2712%27_height=%278%27_viewBox=%270_0_12_8%27%3E%3Cpath_d=%27M1_1l5_5_5-5%27_stroke=%27%23607068%27_stroke-width=%271.5%27_fill=%27none%27_stroke-linecap=%27round%27/%3E%3C/svg%3E')] bg-no-repeat bg-[right_12px_center] cursor-pointer">
-                <option value="">Select occasion</option>
-                <option>Wedding</option>
-                <option>Housewarming</option>
-                <option>Birthday</option>
-                <option>Baby Shower</option>
-                <option>Pooja / Festival</option>
-                <option>Corporate Event</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[10px]">
-              <div className="flex items-center border-[1.5px] border-line rounded-[9px] bg-[#fafaf8] transition-colors focus-within:border-green focus-within:bg-white focus-within:ring-3 focus-within:ring-[rgba(35,71,53,0.08)] overflow-hidden">
-                <span className="pl-[13px] pr-[6px] text-[14px] leading-none shrink-0 opacity-65 pointer-events-none flex items-center font-sans">👥</span>
-                <input required type="number" min="1" placeholder="Guest count" className="flex-1 border-0 rounded-none py-[11px] pl-[4px] pr-[12px] text-[11.5px] outline-none bg-transparent text-ink min-w-0 placeholder:text-[#b0b8b4]" />
+
+            {/* Contact Form Section */}
+            {submitted ? (
+              <div className="bg-white/10 border border-gold/30 rounded-[16px] p-[20px] text-center my-[20px]">
+                <div className="text-[28px] mb-[8px]">✅</div>
+                <h4 className="font-serif text-[18px] text-gold font-bold">Enquiry Received!</h4>
+                <p className="text-[12px] text-white/80 mt-[4px]">
+                  Our concierge team will review your details for <strong className="text-gold">{guestCount} {effectiveOccasionLabel}</strong> gifts and WhatsApp you custom options within 24 hours.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="bg-gold text-green font-bold text-[12px] px-[16px] py-[7px] rounded-full mt-[12px] hover:bg-white transition-colors"
+                >
+                  Submit Another Enquiry
+                </button>
               </div>
-              <div className="flex items-center border-[1.5px] border-line rounded-[9px] bg-[#fafaf8] transition-colors focus-within:border-green focus-within:bg-white focus-within:ring-3 focus-within:ring-[rgba(35,71,53,0.08)] overflow-hidden">
-                <span className="pl-[13px] pr-[6px] text-[14px] leading-none shrink-0 opacity-65 pointer-events-none flex items-center font-sans">₹</span>
-                <select required className="flex-1 border-0 rounded-none py-[11px] pl-[4px] pr-[32px] text-[11.5px] outline-none bg-transparent text-ink min-w-0 appearance-none bg-[url('data:image/svg+xml,%3Csvg_xmlns=%27http://www.w3.org/2000/svg%27_width=%2712%27_height=%278%27_viewBox=%270_0_12_8%27%3E%3Cpath_d=%27M1_1l5_5_5-5%27_stroke=%27%23607068%27_stroke-width=%271.5%27_fill=%27none%27_stroke-linecap=%27round%27/%3E%3C/svg%3E')] bg-no-repeat bg-[right_12px_center] cursor-pointer">
-                  <option value="">Budget per gift</option>
-                  <option>Under ₹99</option>
-                  <option>₹100–149</option>
-                  <option>₹150–249</option>
-                  <option>₹250+</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" className="border-0 rounded-[10px] bg-gradient-to-br from-green to-[#2a5e40] text-white py-[13px] text-[12px] font-bold tracking-[0.03em] cursor-pointer transition-all hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(35,71,53,0.28)] mt-[2px]">Request a Custom Quote →</button>
-          </form>
-          <p className="text-center text-[9.5px] text-muted mt-[8px] opacity-70">🔒 No spam. We only reach out with relevant options.</p>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-[14px] mt-[24px]">
+                <div className="flex flex-col gap-[4px]">
+                  <label className="text-[11px] text-white/80 font-medium">Your Full Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full bg-white/10 border border-white/20 rounded-[10px] px-[14px] py-[10px] text-[12.5px] text-white placeholder:text-white/40 outline-none focus:border-gold transition-colors"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-[4px]">
+                  <label className="text-[11px] text-white/80 font-medium">WhatsApp Number</label>
+                  <input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="w-full bg-white/10 border border-white/20 rounded-[10px] px-[14px] py-[10px] text-[12.5px] text-white placeholder:text-white/40 outline-none focus:border-gold transition-colors"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-gold hover:bg-gold/90 text-green font-bold text-[13px] py-[13px] rounded-[12px] transition-all shadow-md mt-[6px] hover:scale-[1.01]"
+                >
+                  Send Enquiry for {guestCount} Guests →
+                </button>
+
+                <p className="text-center text-[10px] text-white/60">
+                  🔒 Instant response via WhatsApp. No spam guaranteed.
+                </p>
+              </form>
+            )}
+
+          </div>
+
         </div>
 
       </div>
     </section>
   )
 }
+
+
+
