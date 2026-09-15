@@ -40,10 +40,10 @@ const PICKS = {
 }
 
 const PANELS = [
-  { key: 'potli', tag: 'WEDDING FAV', name: 'Potli Stories', emoji: '🎁', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=900&q=85' },
-  { key: 'box', tag: 'PREMIUM', name: 'Gift Boxes', emoji: '📦', img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=900&q=85' },
-  { key: 'bag', tag: 'ECO EDIT', name: 'Jute & Fibre', emoji: '🌿', img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85' },
-  { key: 'utility', tag: 'LOVED', name: 'Keepsakes', emoji: '♡', img: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=85' },
+  { key: 'potli', tag: 'WEDDING FAV', name: 'Potli Stories', emoji: '🎁', img: '/assets/ig_product_20.jpg' },
+  { key: 'box', tag: 'PREMIUM', name: 'Gift Boxes', emoji: '📦', img: '/assets/ig_product_21.jpg' },
+  { key: 'bag', tag: 'ECO EDIT', name: 'Jute & Fibre', emoji: '🌿', img: '/assets/ig_product_22.jpg' },
+  { key: 'utility', tag: 'LOVED', name: 'Keepsakes', emoji: '♡', img: '/assets/ig_product_23.jpg' },
 ]
 
 export default function HeroSignature() {

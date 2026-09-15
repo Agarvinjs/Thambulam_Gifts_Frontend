@@ -3,37 +3,37 @@ const CATS = [
     tag: 'BEST SELLER',
     name: 'Potli Bags',
     price: 'From ₹49',
-    img: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=85',
+    img: '/assets/ig_product_35.jpg',
   },
   {
     tag: 'ECO-FRIENDLY',
     name: 'Jute Bags',
     price: 'From ₹55',
-    img: 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=600&q=85',
+    img: '/assets/ig_product_36.jpg',
   },
   {
     tag: 'GIFT READY',
     name: 'Gift Boxes',
     price: 'From ₹99',
-    img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=85',
+    img: '/assets/ig_product_37.jpg',
   },
   {
     tag: 'SOMETHING USEFUL',
     name: 'Utility Gifts',
     price: 'From ₹85',
-    img: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=600&q=85',
+    img: '/assets/ig_product_38.jpg',
   },
   {
     tag: 'NEW ARRIVALS',
     name: 'Kora Grass',
     price: 'From ₹79',
-    img: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=85',
+    img: '/assets/ig_product_39.jpg',
   },
   {
     tag: 'TRADITIONAL',
     name: 'Thamboolam',
     price: 'From ₹99',
-    img: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=85',
+    img: '/assets/ig_product_40.jpg',
   },
 ]
 

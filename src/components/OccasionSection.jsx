@@ -1,9 +1,9 @@
 const OCCASIONS = [
-  { label: 'The big one', name: 'Wedding', img: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=85' },
-  { label: 'New beginnings', name: 'Housewarming', img: 'https://images.unsplash.com/photo-1513883049090-d0b7439799bf?auto=format&fit=crop&w=700&q=85' },
-  { label: 'Celebrate', name: 'Birthday', img: 'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=700&q=85' },
-  { label: 'Welcome', name: 'Baby Shower', img: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=700&q=85' },
-  { label: 'Festivals', name: 'Pooja & Festive', img: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=85' },
+  { label: 'The big one', name: 'Wedding', img: '/assets/ig_product_30.jpg' },
+  { label: 'New beginnings', name: 'Housewarming', img: '/assets/ig_product_31.jpg' },
+  { label: 'Celebrate', name: 'Birthday', img: '/assets/ig_product_32.jpg' },
+  { label: 'Welcome', name: 'Baby Shower', img: '/assets/ig_product_33.jpg' },
+  { label: 'Festivals', name: 'Pooja & Festive', img: '/assets/ig_product_34.jpg' },
 ]
 
 export default function OccasionSection() {
