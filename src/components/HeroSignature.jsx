@@ -6,7 +6,7 @@ const THEMES = {
     eyebrow: 'The wedding gifting edit',
     headline: 'A little <span class="accent">something to remember.</span>',
     sub: 'Return gifts designed to become part of the story — not just something guests take home.',
-    mini: 'a thank-you from', title: 'ILAI', copy: 'For being part of our day.',
+    mini: 'a thank-you from', title: 'SSS', copy: 'For being part of our day.',
     cta: 'Explore the collection →',
   },
   house: {
@@ -20,14 +20,14 @@ const THEMES = {
     eyebrow: 'The festive gifting edit',
     headline: 'Bring a little<br/><span class="accent">joy home.</span>',
     sub: 'Traditional textures, thoughtful keepsakes and bright little gifts for festive tables.',
-    mini: 'a festive note from', title: 'ILAI', copy: 'Wishing you a beautiful celebration.',
+    mini: 'a festive note from', title: 'SSS', copy: 'Wishing you a beautiful celebration.',
     cta: 'Explore the collection →',
   },
   birthday: {
     eyebrow: 'The celebration gifting edit',
     headline: 'Make their day<br/><span class="accent">a little brighter.</span>',
     sub: 'Playful, useful and beautiful gifts for birthdays, milestones and the people worth celebrating.',
-    mini: 'a little note from', title: 'ILAI', copy: 'For making the day more special.',
+    mini: 'a little note from', title: 'SSS', copy: 'For making the day more special.',
     cta: 'Explore the collection →',
   },
 }

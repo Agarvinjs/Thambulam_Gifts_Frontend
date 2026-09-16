@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <a className="inline-flex items-center gap-[9px] font-serif text-[24px] tracking-[-0.01em] text-white">
               <BrandMark />
-              <span>Ilai</span>
+              <span>SSS</span>
             </a>
             <p className="text-[10.5px] max-w-[260px] leading-[1.7] mt-[10px]">Curated return gifts, favour bags and celebration gifting with a little more thought in every detail.</p>
           </div>
@@ -52,7 +52,7 @@ export default function Footer() {
           <div>
             <h4 className="text-[10px] tracking-[0.1em] uppercase text-white mb-[12px]">Contact</h4>
             <ul className="list-none p-0 m-0 grid gap-[8px]">
-              <li className="text-[10.5px]">hello@ilai.co.in</li>
+              <li className="text-[10.5px]">hello@sss.co.in</li>
               <li className="text-[10.5px]">+91 98765 43210</li>
               <li className="text-[10.5px]">Chennai, Tamil Nadu</li>
               <li className="text-[10.5px]">Mon–Sat · 10am–6pm</li>
@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-white/10 py-[17px] flex justify-between items-center text-[9.5px] flex-wrap gap-2">
-          <span>© 2026 Ilai. All rights reserved.</span>
+          <span>© 2026 SSS. All rights reserved.</span>
           <div className="flex gap-[7px]">
             <a className="w-[26px] h-[26px] border border-white/18 rounded-full grid place-items-center text-[10.5px] text-[#cbd6ce] hover:text-white hover:border-white transition-colors" href="#">◎</a>
             <a className="w-[26px] h-[26px] border border-white/18 rounded-full grid place-items-center text-[10.5px] text-[#cbd6ce] hover:text-white hover:border-white transition-colors" href="#">f</a>

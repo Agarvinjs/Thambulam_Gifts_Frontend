@@ -1,7 +1,7 @@
 export default function Newsletter() {
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert("You're on the Ilai list.")
+    alert("You're on the SSS list.")
     e.target.reset()
   }
 
@@ -20,7 +20,7 @@ export default function Newsletter() {
             className="w-full md:w-[260px] border border-line rounded-[6px] p-[12px] text-[10.5px] bg-white outline-none focus:border-green"
           />
           <button className="border-0 rounded-[6px] bg-terracotta text-white font-bold px-[19px] py-[12px] text-[10.5px] whitespace-nowrap cursor-pointer hover:opacity-90 transition-opacity">
-            Join Ilai
+            Join SSS
           </button>
         </form>
       </div>

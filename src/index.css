@@ -98,3 +98,59 @@ body {
   background-color: var(--paper);
   color: var(--ink);
 }
+
+/* Custom luxury range slider with filled horizontal line before the dot (thumb) */
+input[type="range"].luxury-range {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  height: 7px;
+}
+
+input[type="range"].luxury-range::-webkit-slider-runnable-track {
+  height: 7px;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+input[type="range"].luxury-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -7.5px;
+  border-radius: 50%;
+  background: #234735;
+  border: 3.5px solid #f7f3eb;
+  box-shadow: 0 2px 8px rgba(35, 71, 53, 0.45);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+input[type="range"].luxury-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 10px rgba(35, 71, 53, 0.55);
+}
+
+input[type="range"].luxury-range::-webkit-slider-thumb:active {
+  transform: scale(1.25);
+  cursor: grabbing;
+}
+
+input[type="range"].luxury-range::-moz-range-track {
+  height: 7px;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+input[type="range"].luxury-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #234735;
+  border: 3.5px solid #f7f3eb;
+  box-shadow: 0 2px 8px rgba(35, 71, 53, 0.45);
+  cursor: pointer;
+}

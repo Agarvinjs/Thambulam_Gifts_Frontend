@@ -18,7 +18,7 @@ const NAV_ITEMS = [
       { heading: 'By Price', links: [{ label: 'Under ₹99', href: '#budget' }, { label: '₹100–149', href: '#budget' }, { label: '₹150–249', href: '#budget' }, { label: 'Premium gifts', href: '#budget' }] },
       { heading: 'By Type', links: [{ label: 'Potli bags', href: '#products' }, { label: 'Utility gifts', href: '#products' }, { label: 'Gift boxes', href: '#products' }, { label: 'Eco-friendly', href: '#products' }] },
       { heading: 'By Occasion', links: [{ label: 'Wedding', href: '#occasions' }, { label: 'Housewarming', href: '#occasions' }, { label: 'Birthday', href: '#occasions' }, { label: 'Pooja & festivals', href: '#occasions' }] },
-      { promo: true, tag: 'The Ilai Edit', title: 'Gifts that feel considered.' },
+      { promo: true, tag: 'The SSS Edit', title: 'Gifts that feel considered.' },
     ],
   },
   {
@@ -52,9 +52,25 @@ const NAV_ITEMS = [
   { label: 'Bulk Orders', href: '#bulk', simple: true },
 ]
 
-export default function Navbar({ onCartOpen, onSearchToggle }) {
+export default function Navbar({ onCartOpen, onSearchToggle, onNavigateHome }) {
   const { cartCount } = useCart()
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const handleLogoClick = (e) => {
+    e.preventDefault()
+    if (onNavigateHome) {
+      onNavigateHome()
+    } else {
+      window.location.hash = ''
+    }
+  }
+
+  const handleNavClick = () => {
+    if (onNavigateHome) {
+      onNavigateHome()
+    }
+    setMobileOpen(false)
+  }
 
   return (
     <header className="sticky top-0 z-[1000]">
@@ -74,9 +90,9 @@ export default function Navbar({ onCartOpen, onSearchToggle }) {
                 <path d="M4 7h16M4 12h16M4 17h16" />
               </svg>
             </button>
-            <a href="#" className="flex items-center gap-[9px] text-green">
+            <a href="#" onClick={handleLogoClick} className="flex items-center gap-[9px] text-green cursor-pointer">
               <BrandMark />
-              <span className="font-serif text-[29px] leading-none">Ilai</span>
+              <span className="font-serif text-[29px] leading-none">SSS</span>
             </a>
           </div>
 
@@ -114,6 +130,7 @@ export default function Navbar({ onCartOpen, onSearchToggle }) {
                 <a
                   key={item.label}
                   href={item.href}
+                  onClick={handleNavClick}
                   className="px-[18px] py-[11px] text-[11.5px] font-bold text-white/85 whitespace-nowrap hover:text-[#e9c687] transition-colors"
                 >
                   {item.label}
@@ -148,7 +165,7 @@ export default function Navbar({ onCartOpen, onSearchToggle }) {
                         <div key={ci}>
                           <h5 className="text-[9.5px] uppercase tracking-[0.12em] text-terracotta mb-[14px] font-bold">{col.heading}</h5>
                           {col.links.map(link => (
-                            <a key={link.label} href={link.href} className="block text-[11.5px] py-[5px] text-[#50534d] hover:text-green transition-colors">
+                            <a key={link.label} href={link.href} onClick={handleNavClick} className="block text-[11.5px] py-[5px] text-[#50534d] hover:text-green transition-colors">
                               {link.label}
                             </a>
                           ))}

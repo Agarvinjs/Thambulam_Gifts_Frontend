@@ -119,15 +119,23 @@ export default function BulkQuoteSection() {
               </div>
 
               <div className="flex flex-col gap-[12px]">
-                <input
-                  type="range"
-                  min="25"
-                  max="1000"
-                  step="25"
-                  value={guestCount}
-                  onChange={(e) => setGuestCount(Number(e.target.value))}
-                  className="w-full h-[6px] bg-line rounded-lg appearance-none cursor-pointer accent-green"
-                />
+                {(() => {
+                  const guestSliderPct = Math.min(100, Math.max(0, ((guestCount - 25) / (1000 - 25)) * 100))
+                  return (
+                    <input
+                      type="range"
+                      min="25"
+                      max="1000"
+                      step="25"
+                      value={guestCount}
+                      onChange={(e) => setGuestCount(Number(e.target.value))}
+                      style={{
+                        background: `linear-gradient(to right, #234735 0%, #234735 ${guestSliderPct}%, #e2d9c8 ${guestSliderPct}%, #e2d9c8 100%)`,
+                      }}
+                      className="w-full h-[7px] rounded-lg appearance-none cursor-pointer luxury-range accent-green transition-all"
+                    />
+                  )
+                })()}
 
                 {/* Accurately Aligned Tick Mark Labels */}
                 <div className="relative w-full h-[20px] text-[11px] text-muted font-medium select-none">
