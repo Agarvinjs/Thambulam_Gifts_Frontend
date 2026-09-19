@@ -154,3 +154,569 @@ input[type="range"].luxury-range::-moz-range-thumb {
   box-shadow: 0 2px 8px rgba(35, 71, 53, 0.45);
   cursor: pointer;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   DANGLER PREVAIL — Boutique Hanging Showcase Section
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes dangleSwing {
+  0%   { transform: rotate(-6deg); }
+  100% { transform: rotate(6deg);  }
+}
+
+@keyframes dangleSlideInLeft {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes dangleSlideInRight {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes dangleSlideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-60px); }
+}
+@keyframes dangleSlideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(60px); }
+}
+
+@keyframes dangleFadeIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes dangleSpotlight {
+  0%, 100% { opacity: 0.4; transform: scaleX(0.8); }
+  50%       { opacity: 0.65; transform: scaleX(1.1); }
+}
+
+/* ── Section container ── */
+.dangler-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0e1f16 0%, #1a2f22 45%, #162918 100%);
+  padding: 5rem 2rem 4rem;
+}
+
+.dangler-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.dangler-bg-orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(181,139,81,0.10) 0%, transparent 70%);
+  top: -100px; left: -100px;
+}
+.dangler-bg-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(35,71,53,0.30) 0%, transparent 70%);
+  bottom: -80px; right: -60px;
+}
+
+/* ── Header ── */
+.dangler-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: dangleFadeIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.dangler-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin-bottom: 0.75rem;
+}
+.dangler-eyebrow-line {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+}
+
+.dangler-title {
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #f7f0e0;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.dangler-subtitle {
+  font-size: 0.95rem;
+  color: rgba(247,240,224,0.55);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* ── Stage (wire + products) ── */
+.dangler-stage {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Wire SVG ── */
+.dangler-wire-container {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 0;
+  z-index: 3;
+}
+.dangler-wire-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Carousel wrapper (arrows + viewport) ── */
+.dangler-carousel-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  padding: 0 0 1rem;
+}
+
+/* ── Arrow buttons ── */
+.dangler-arrow {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201,168,76,0.45);
+  background: rgba(201,168,76,0.08);
+  color: #c9a84c;
+  cursor: pointer;
+  margin-top: 100px;
+  transition: background 0.25s, border-color 0.25s, transform 0.2s, opacity 0.2s;
+  z-index: 10;
+}
+.dangler-arrow:hover {
+  background: rgba(201,168,76,0.2);
+  border-color: #c9a84c;
+  transform: scale(1.08);
+}
+.dangler-arrow-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Carousel viewport (clips the extra +1 card) ── */
+.dangler-carousel-viewport {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ── Products row (DO NOT set overflow — viewport handles it) ── */
+.dangler-products-row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 0 0 3rem;
+  overflow: visible;
+  width: max-content;
+}
+
+/* Slide transitions */
+.dangler-products-row.dangler-sliding.dangler-slide-left {
+  animation: dangleSlideInLeft 0.38s cubic-bezier(0.22,1,0.36,1) both;
+}
+.dangler-products-row.dangler-sliding.dangler-slide-right {
+  animation: dangleSlideInRight 0.38s cubic-bezier(0.22,1,0.36,1) both;
+}
+.dangler-products-row.dangler-slide-none {
+  animation: none;
+}
+
+/* ── Dot indicators (12 products — keep them tiny) ── */
+.dangler-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: -10px;
+  margin-bottom: 14px;
+}
+.dangler-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(201,168,76,0.25);
+  cursor: pointer;
+  transition: background 0.3s, width 0.35s, border-radius 0.35s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.dangler-dot-active {
+  background: #c9a84c;
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* ── Progress bar ── */
+.dangler-progress-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(201,168,76,0.15);
+  border-radius: 2px;
+  margin: 0 auto 10px;
+  overflow: hidden;
+}
+.dangler-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b6914, #f0d882, #c9a84c);
+  border-radius: 2px;
+  transition: width 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Page counter ── */
+.dangler-counter {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: rgba(247,240,224,0.35);
+  margin-bottom: 1.5rem;
+}
+.dangler-counter-current {
+  color: #c9a84c;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.dangler-counter-sep {
+  margin: 0 2px;
+}
+.dangler-counter-total {
+  font-weight: 400;
+}
+
+/* ── Individual dangler item ── */
+.dangler-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 170px;
+  animation: dangleFadeIn 0.65s cubic-bezier(0.22,1,0.36,1) calc(var(--item-index) * 0.12s) both;
+}
+
+/* Top string from wire to card — minimal height to bridge the wire gap */
+.dangler-string-top {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, #c9a84c, #a07830);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Swinging assembly ── */
+.dangler-assembly {
+  transform-origin: top center;
+  animation: dangleSwing linear infinite alternate;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+.dangler-assembly:hover,
+.dangler-paused {
+  animation-play-state: paused !important;
+}
+
+/* ── UNIFIED Dangler Card (image + info in one piece) ── */
+.dangler-card {
+  position: relative;
+  width: 170px;
+  background: #f7f0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow:
+    0 10px 32px rgba(0,0,0,0.5),
+    0 2px 8px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+.dangler-card-hovered {
+  box-shadow:
+    0 20px 55px rgba(0,0,0,0.65),
+    0 4px 14px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+  transform: scale(1.04);
+}
+
+/* Golden pin at very top center */
+.dangler-pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f0c040, #8b6914);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 0 0 2px rgba(201,168,76,0.4);
+  z-index: 10;
+}
+
+/* Image area */
+.dangler-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 148px;
+  overflow: hidden;
+  background: #e8dfc8;
+}
+.dangler-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.dangler-card-hovered .dangler-card-img {
+  transform: scale(1.07);
+}
+
+/* Quick-view overlay on image */
+.dangler-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14,31,22,0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  backdrop-filter: blur(2px);
+}
+.dangler-overlay-visible {
+  opacity: 1;
+}
+.dangler-quickview-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f7f0e0;
+  color: #1a2f22;
+  border: none;
+  padding: 7px 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.dangler-quickview-btn:hover {
+  background: #c9a84c;
+  color: #fff;
+}
+
+/* Info section below image */
+.dangler-card-info {
+  padding: 10px 12px 12px;
+  background: #f7f0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Tag badge */
+.dangler-card-badge {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8b6914;
+  background: rgba(201,168,76,0.18);
+  padding: 2px 6px;
+  border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.35);
+  align-self: flex-start;
+  margin-bottom: 2px;
+}
+
+/* Product name */
+.dangler-card-name {
+  font-family: "DM Serif Display", serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #1e1408;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Price */
+.dangler-card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-top: 2px;
+}
+.dangler-card-price {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #1a2f22;
+  letter-spacing: -0.01em;
+}
+.dangler-card-unit {
+  font-size: 0.62rem;
+  color: #6b5a30;
+  font-weight: 500;
+}
+
+/* MOQ + rating row */
+.dangler-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(201,168,76,0.25);
+}
+.dangler-card-moq {
+  font-size: 0.6rem;
+  color: #8b6914;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.dangler-card-rating {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1a2f22;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.dangler-star {
+  color: #c9a84c;
+  font-size: 0.75rem;
+}
+
+
+/* ── Spotlight glow on hover ── */
+.dangler-spotlight {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0.7);
+  width: 140px;
+  height: 30px;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.35) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.dangler-spotlight-visible {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+  animation: dangleSpotlight 1.8s ease-in-out infinite;
+}
+
+/* ── Bottom CTA ── */
+.dangler-footer-cta {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: 0.5rem;
+}
+.dangler-view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1.5px solid rgba(201,168,76,0.55);
+  color: #c9a84c;
+  padding: 12px 32px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+}
+.dangler-view-all-btn:hover {
+  background: rgba(201,168,76,0.12);
+  border-color: #c9a84c;
+  color: #f0d882;
+  transform: translateY(-2px);
+}
+.dangler-btn-arrow {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+.dangler-view-all-btn:hover .dangler-btn-arrow {
+  transform: translateY(3px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .dangler-products-row { gap: 1.2rem; }
+  .dangler-item { width: 170px; }
+  .dangler-photo-card { width: 152px; }
+  .dangler-tag { width: 116px; }
+}
+
+@media (max-width: 768px) {
+  .dangler-section { padding: 3.5rem 0 3rem; }
+  .dangler-header { padding: 0 1.5rem; }
+  .dangler-products-row {
+    padding: 0 0.5rem 2.5rem;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .dangler-arrow {
+    width: 36px;
+    height: 36px;
+    margin-top: 90px;
+  }
+  .dangler-item { width: 155px; }
+  .dangler-photo-card { width: 138px; }
+  .dangler-tag { width: 106px; }
+}
+
+@media (max-width: 480px) {
+  .dangler-section { padding: 3rem 0 2.5rem; }
+  .dangler-products-row {
+    padding: 0 0.25rem 2rem;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .dangler-arrow { width: 32px; height: 32px; margin-top: 80px; }
+  .dangler-item { width: 145px; }
+  .dangler-photo-card { width: 128px; }
+  .dangler-photo-frame { height: 112px; }
+  .dangler-tag { width: 100px; }
+  .dangler-title { font-size: 1.75rem; }
+  .dangler-progress-bar { width: 130px; }
+}

@@ -7,7 +7,7 @@ const BUDGETS = [
 
 export default function BudgetSection() {
   return (
-    <section className="pb-[78px]" id="budget">
+    <section className="pt-[70px] md:pt-[84px] pb-[78px]" id="budget">
       <div className="w-[min(1280px,calc(100%-48px))] mx-auto">
         <div className="flex flex-col md:flex-row justify-between gap-[25px] items-start md:items-end mb-[28px]">
           <div>

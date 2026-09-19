@@ -11,6 +11,7 @@ import FeatureCards      from './components/FeatureCards'
 import ProductShelf      from './components/ProductShelf'
 import ProductDetailPage from './components/ProductDetailPage'
 import Editorial         from './components/Editorial'
+import DanglerPrevail    from './components/DanglerPrevail'
 import BudgetSection     from './components/BudgetSection'
 import OccasionSection   from './components/OccasionSection'
 import BulkQuoteSection  from './components/BulkQuoteSection'
@@ -110,6 +111,7 @@ export default function App() {
           <FeatureCards />
           <ProductShelf searchQuery={searchQuery} onSelectProduct={handleSelectProduct} />
           <Editorial />
+          <DanglerPrevail onSelectProduct={handleSelectProduct} />
           <BudgetSection />
           <OccasionSection />
           <BulkQuoteSection />
